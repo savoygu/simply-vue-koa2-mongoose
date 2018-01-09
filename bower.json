@@ -1,0 +1,15 @@
+{
+  "name": "simply-vue",
+  "homepage": "https://github.com/savoygu/simply-vue-koa2-mongoose",
+  "authors": [
+    "savoygu"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "vue": "^2.5.13",
+    "axios": "^0.17.1"
+  }
+}

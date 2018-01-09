@@ -1,0 +1,31 @@
+{
+  "name": "simply-vue-koa2-mongoose",
+  "version": "1.0.0",
+  "description": "简单的 Vue + koa2 + mongoose CURD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server/server.js",
+    "start": "anywhere -d ./public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savoygu/simply-vue-koa2-mongoose.git"
+  },
+  "author": "savoygu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/savoygu/simply-vue-koa2-mongoose/issues"
+  },
+  "homepage": "https://github.com/savoygu/simply-vue-koa2-mongoose#readme",
+  "dependencies": {
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^7.3.0",
+    "mongoose": "^4.13.9"
+  },
+  "devDependencies": {
+    "anywhere": "^1.4.0"
+  }
+}

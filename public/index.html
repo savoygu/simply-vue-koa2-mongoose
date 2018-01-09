@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="(user, index) in users" :key="index">
+                <span>{{user.name}}</span>
+                <button @click="destroyUser(user, index)">删除</button>
+                <button @click="showUser(user, index)">更新</button>
+            </li>
+        </ul>
+
+        <input type="hidden" v-model="user._id">
+        <input type="text" v-model="user.name">
+        <button @click="saveUser(user)">{{user._id ? '更新' : '添加'}}</button>
+
+    </div>
+
+</body>
+<script src="libs/vue/dist/vue.min.js"></script>
+<script src="libs/axios/dist/axios.min.js"></script>
+<script>
+    axios.defaults.baseURL = 'http://localhost:3000'
+    new Vue({
+        el: '#app',
+
+        data () {
+            return {
+                users: [],
+                user: {
+                    _id: '',
+                    name: ''
+                },
+                current: -1
+            }
+        },
+
+        methods: {
+            getUsers () {
+                axios.get('/users').then(function (response) {
+                    this.users = response.data
+                }.bind(this))
+            },
+
+            showUser (user, index) {
+                this.current = index
+                this.user = JSON.parse(JSON.stringify(user))
+            },
+
+            saveUser (user) {
+                axios.post('/user', {user: user}).then(function (response) {
+                    if (!this.user._id) {
+                        this.users.push(response.data)
+                    } else {
+                        this.users.splice(this.current, 1, response.data)
+                    }
+                    this.user._id = this.user.name = ''
+                }.bind(this))
+            },
+
+            destroyUser (user, index) {
+                axios.delete('/user/' + user._id).then(function (response) {
+                    this.users.splice(index, 1)
+                }.bind(this))
+            }
+        },
+
+        mounted () {
+            this.getUsers()
+        }
+    })
+</script>
+</html>
